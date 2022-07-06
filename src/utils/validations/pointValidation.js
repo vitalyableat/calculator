@@ -1,13 +1,13 @@
-import {CURRENT_STATE, SCOREBOARD} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, SCOREBOARD} from "../../consts";
 
 export const pointValidation = () => {
-  const checkFirstNumWithPoint = SCOREBOARD.value.includes(".")
-  const checkSecondNumWithPoint = SCOREBOARD.value.split(CURRENT_STATE.firstSign)[1].includes(".")
+  const isFirstIncludesPoint = SCOREBOARD.value.includes(".")
+  const isSecondIncludesPoint = SCOREBOARD.value.substring(CURRENT_STATE.signIndex + 1, SCOREBOARD.value.length).includes(".")
 
-  const canAddPointToFirstNum = !CURRENT_STATE.signAmount && !checkFirstNumWithPoint
-  const canAddPointToSecondNum = CURRENT_STATE.signAmount && !checkSecondNumWithPoint
+  const firstCondition = !CURRENT_STATE.signIndex && !isFirstIncludesPoint
+  const secondCondition = CURRENT_STATE.signIndex && !isSecondIncludesPoint
 
-  if (canAddPointToFirstNum || canAddPointToSecondNum) {
-    SCOREBOARD.value += '.'
+  if (firstCondition || secondCondition) {
+      SCOREBOARD.value += "."
   }
 }
