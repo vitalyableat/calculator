@@ -14,6 +14,8 @@ export const ROOTS = document.getElementsByName("root")
 export const ONE_VALUE_OPERATIONS = document.getElementsByName("oneValueOperations")
 export const MOD = document.getElementById("mod")
 
+export const SIGN_VALUES = ["+", "-", "×", "÷"]
+
 export const CURRENT_STATE = {
   x: 0,
   y: 0,

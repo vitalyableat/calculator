@@ -6,6 +6,7 @@ export class Calculator {
 
   resetValue(value) {
     this.value = value
+    this.history = []
   }
 
   executeCommand(command) {
