@@ -19,7 +19,6 @@ import {themeChangeDark, themeChangeLight} from "./utils/themeChange";
 import {prevValueValidation} from "./utils/validations/prevValueValidation";
 import {errorHandler} from "./utils/validations/errorHandler";
 
-
 BACKSPACE.addEventListener('click', backspaceValidation)
 
 NUMBERS.forEach(num => num.addEventListener('click', () => numberValidation(num)))
