@@ -1,4 +1,4 @@
-import {CALCULATOR, CURRENT_STATE, SCOREBOARD, SIGN_VALUES} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD, SIGN_VALUES} from "../../consts";
 import {chooseCommand} from "../chooseCommand";
 
 export const signValidation = (sign) => {
@@ -21,6 +21,8 @@ const replaceSign = (sign) => {
 
   if (canChangeTheSign) {
     SCOREBOARD.value = SCOREBOARD.value.substring(0, SCOREBOARD.value.length - 1) + sign.value
+  } else {
+    ERROR_MESSAGE.innerHTML = "Can't put this sign here"
   }
 }
 
@@ -30,11 +32,11 @@ const twoSignCommandHandler = (sign) => {
   if (!SCOREBOARD.value && signIsMinusOrPlus) {
     SCOREBOARD.value += sign.value
   } else if ((!SCOREBOARD.value || !Number.isFinite(Number(SCOREBOARD.value)))) {
-    console.log("Write N value")
+    ERROR_MESSAGE.innerHTML = "Write N value"
   } else if (Number(SCOREBOARD.value) === 0 && CURRENT_STATE.command === "x^1/n") {
-    console.log("Division by 0")
+    ERROR_MESSAGE.innerHTML = "Division by 0"
   } else if (CURRENT_STATE.command === "x^1/n" && Number(SCOREBOARD.value) % 2 === 0 && CALCULATOR.value < 0) {
-    console.log("For negative numbers only odd roots available")
+    ERROR_MESSAGE.innerHTML = "For negative numbers only odd roots available"
   } else {
     CALCULATOR.executeCommand(chooseCommand(CURRENT_STATE.command, Number(SCOREBOARD.value)))
     SCOREBOARD.value = String(CALCULATOR.value)
@@ -65,5 +67,7 @@ const addMinusOrPlusIfNeeded = (sign) => {
 
   if (signIsMinusOrPlus) {
     SCOREBOARD.value += sign.value
+  } else {
+    ERROR_MESSAGE.innerHTML = "Can't start with this sign"
   }
 }

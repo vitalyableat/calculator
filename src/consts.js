@@ -18,6 +18,7 @@ export const THEME_WRAP = document.getElementById("themeWrap")
 export const MEMORY_WRAP = document.getElementById("memoryWrap")
 export const ALL_ELEMENTS = document.querySelectorAll("*")
 export const BODY = document.querySelectorAll('body')[0]
+export const ERROR_MESSAGE = document.getElementById("errorMessage")
 
 export const SIGN_VALUES = ["+", "-", "×", "÷"]
 

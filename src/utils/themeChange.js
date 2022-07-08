@@ -1,7 +1,7 @@
 import {
   ALL_ELEMENTS, BODY,
   CURRENT_STATE,
-  DARK_THEME_BTN,
+  DARK_THEME_BTN, ERROR_MESSAGE,
   LIGHT_THEME_BTN,
   MEMORY_WRAP,
   PREV_VALUE_BTN,
@@ -20,6 +20,8 @@ export const themeChangeDark = () => {
     THEME_WRAP.style.backgroundColor = "#333"
     ALL_ELEMENTS.forEach(el => el.style.color = "#e6e6e6")
     BODY.style.backgroundColor = "#48494a"
+    ERROR_MESSAGE.style.backgroundColor = "#333"
+    ERROR_MESSAGE.style.color = "red"
   }
 }
 
@@ -34,5 +36,7 @@ export const themeChangeLight = () => {
     THEME_WRAP.style.backgroundColor = "#e6e6e6"
     ALL_ELEMENTS.forEach(el => el.style.color = "#000")
     BODY.style.backgroundColor = "#b4b4b4"
+    ERROR_MESSAGE.style.backgroundColor = "#e6e6e6"
+    ERROR_MESSAGE.style.color = "darkred"
   }
 }

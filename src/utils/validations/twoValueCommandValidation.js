@@ -1,11 +1,11 @@
-import {CALCULATOR, CURRENT_STATE, SCOREBOARD} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD} from "../../consts";
 
 export const twoValueCommandValidation = (com) => {
   const isPointOrMinusOrPlus = SCOREBOARD.value === "." || SCOREBOARD.value === "-" || SCOREBOARD.value === "+"
   if (CURRENT_STATE.command) {
-    console.log("Perform previous command")
+    ERROR_MESSAGE.innerHTML = "Perform previous command"
   } else if (!SCOREBOARD.value || (SCOREBOARD.value.length && isPointOrMinusOrPlus) || CURRENT_STATE.signIndex) {
-    console.log("Write X value")
+    ERROR_MESSAGE.innerHTML = "Write X value"
   } else {
     CALCULATOR.resetValue(Number(SCOREBOARD.value))
     SCOREBOARD.value = ""

@@ -22,7 +22,7 @@ body {
 /* HEADER */
 
 div.header {
-    margin: -80px 0 20px;
+    margin-bottom: 20px;
     height: 60px;
     width: 600px;
     border-radius: 15px;
@@ -171,4 +171,18 @@ button.pow {
 
 sup {
     font-size: 20px;
+}
+
+/* ERROR */
+
+h3.errorMessage {
+    background-color: #333333;
+    outline: 4px solid black;
+    border-radius: 15px;
+    width: 600px;
+    color: red;
+    line-height: 60px;
+    margin-top: 20px;
+    text-align: center;
+    min-height: 60px;
 }

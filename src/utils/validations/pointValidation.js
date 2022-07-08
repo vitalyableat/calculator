@@ -1,4 +1,4 @@
-import {CALCULATOR, CURRENT_STATE, SCOREBOARD} from "../../consts";
+import {CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD} from "../../consts";
 
 export const pointValidation = () => {
   const isFirstIncludesPoint = SCOREBOARD.value.includes(".")
@@ -9,5 +9,7 @@ export const pointValidation = () => {
 
   if (firstCondition || secondCondition) {
       SCOREBOARD.value += "."
+  } else {
+    ERROR_MESSAGE.innerHTML = "Only one point in number allowed"
   }
 }

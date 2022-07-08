@@ -5,7 +5,7 @@ import {
   LIGHT_THEME_BTN,
   MEMORIES,
   NUMBERS,
-  ONE_VALUE_COMMANDS, PREV_VALUE_BTN,
+  ONE_VALUE_COMMANDS, PREV_VALUE_BTN, SCOREBOARD,
   SIGNS,
   TWO_VALUE_COMMANDS
 } from "./consts";
@@ -17,6 +17,7 @@ import {twoValueCommandValidation} from "./utils/validations/twoValueCommandVali
 import {memoryValidation} from "./utils/validations/memoryValidation";
 import {themeChangeDark, themeChangeLight} from "./utils/themeChange";
 import {prevValueValidation} from "./utils/validations/prevValueValidation";
+import {errorHandler} from "./utils/validations/errorHandler";
 
 
 BACKSPACE.addEventListener('click', backspaceValidation)
@@ -35,3 +36,26 @@ DARK_THEME_BTN.addEventListener('click', themeChangeDark)
 LIGHT_THEME_BTN.addEventListener('click', themeChangeLight)
 
 PREV_VALUE_BTN.addEventListener('click', prevValueValidation)
+
+SCOREBOARD.addEventListener('input', errorHandler)
+
+const descriptorProp = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+const descriptorAttr = Object.getOwnPropertyDescriptor(Element.prototype, 'setAttribute');
+
+Object.defineProperties(SCOREBOARD, {
+  value: {
+    get: descriptorProp.get,
+    set(value) {
+      errorHandler();
+      descriptorProp.set.call(this, value);
+    },
+  },
+  setAttribute: {
+    value(attr, value) {
+      if (attr === 'value') {
+        errorHandler();
+      }
+      descriptorAttr.value.call(this, attr, value);
+    },
+  }
+});
