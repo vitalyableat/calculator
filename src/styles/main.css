@@ -1,12 +1,3 @@
-/*
-    orange - ff9f0b
-    dark grey - 48494a
-    mid grey - 5a5b5c
-    light grey - 757677
-
-    font color - e6e6e6
-*/
-
 * {
     padding: 0;
     margin: 0;
@@ -25,7 +16,104 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    flex-direction: column;
 }
+
+/* HEADER */
+
+div.header {
+    margin: -80px 0 20px;
+    height: 60px;
+    width: 600px;
+    border-radius: 15px;
+    display: flex;
+}
+
+div.themeWrap {
+    display: flex;
+    padding-left: 10px;
+    outline: 4px solid black;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+h2.themeTxt {
+    line-height: 60px;
+    margin-right: 10px;
+}
+
+div.themeIconWrap {
+    display: flex;
+    padding: 10px;
+    background-color: #757677;
+}
+
+div.themeIconWrap:hover {
+    cursor: pointer;
+    background-color: #222222;
+}
+
+div.selectedTheme {
+    background-color: #ff8000;
+}
+
+div.themeIcon {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    outline: 3px solid black;
+}
+
+div.darkTheme {
+    background-color: #333333;
+}
+
+div.lightTheme {
+    background-color: #e6e6e6;
+}
+
+div.prevValue {
+    background-color: #333;
+    margin: 0 15px;
+    outline: 4px solid black;
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+
+div.prevValueLight {
+    background-color: #e6e6e6;
+}
+
+div.prevValue:hover {
+    cursor: pointer;
+    background-color: #222222;
+}
+
+h2.prevValueTxt {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+div.memory {
+    width: 225px;
+    background-color: #333333;
+    border-radius: 15px;
+    outline: 4px solid black;
+    line-height: 60px;
+    padding: 0 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+h2#memValue {
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* BODY */
 
 div.wrap {
     width: 600px;

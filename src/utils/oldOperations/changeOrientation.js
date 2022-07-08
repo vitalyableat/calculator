@@ -1,1 +1,0 @@
-export const changeOrientation = (x) => x === 0 ? 0 : -x
