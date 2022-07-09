@@ -1,6 +1,6 @@
-import {CALCULATOR, CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD} from "../../consts";
-import {chooseCommand} from "../chooseCommand";
+import {CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD} from "../../consts";
 import {errorHandler} from "./errorHandler";
+import {memoryCommandSelector} from "../commandSelectors/memoryCommandSelector";
 
 export const memoryValidation = (mem) => {
   const isPointOrMinusOrPlus = SCOREBOARD.value === "." || SCOREBOARD.value === "-" || SCOREBOARD.value === "+"
@@ -10,6 +10,6 @@ export const memoryValidation = (mem) => {
     ERROR_MESSAGE.innerHTML = "Need one number"
   } else {
     mem.value === "MC" && errorHandler()
-    chooseCommand(mem.value)
+    memoryCommandSelector(mem.value)
   }
 }

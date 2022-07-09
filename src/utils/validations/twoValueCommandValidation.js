@@ -6,6 +6,8 @@ export const twoValueCommandValidation = (com) => {
     ERROR_MESSAGE.innerHTML = "Perform previous command"
   } else if (!SCOREBOARD.value || (SCOREBOARD.value.length && isPointOrMinusOrPlus) || CURRENT_STATE.signIndex) {
     ERROR_MESSAGE.innerHTML = "Write X value"
+  } else if (com.value === "x^1/n" && Number(SCOREBOARD.value) < 0) {
+    ERROR_MESSAGE.innerHTML = "For negative numbers roots are not available"
   } else {
     CALCULATOR.resetValue(Number(SCOREBOARD.value))
     SCOREBOARD.value = ""

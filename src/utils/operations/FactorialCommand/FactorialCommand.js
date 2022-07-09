@@ -10,6 +10,9 @@ export class FactorialCommand {
 }
 
 const factorial = (val = 1, n) => {
+  if (n < 0) {
+    return -factorial(val, -n)
+  }
   if (n === 1 || n === 0) {
     return val
   }
@@ -17,6 +20,9 @@ const factorial = (val = 1, n) => {
 }
 
 const undoFactorial = (val, n) => {
+  if (val < 0) {
+    return -undoFactorial(-val, n)
+  }
   if (val === 1) {
     return n - 1
   }

@@ -1,4 +1,4 @@
-export class ModCommand {
+export class PercentageCommand {
   execute(currentValue) {
     return currentValue / 100
   }
