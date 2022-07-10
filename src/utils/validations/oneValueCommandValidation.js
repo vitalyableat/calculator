@@ -1,18 +1,23 @@
-import {CALCULATOR, CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, ERROR, SCOREBOARD} from "../../consts";
 import {oneValueCommandSelector} from "../commandSelectors/oneValueCommandSelector";
 
 export const oneValueCommandValidation = (com) => {
   const isPointOrMinusOrPlus = SCOREBOARD.value === "." || SCOREBOARD.value === "-" || SCOREBOARD.value === "+"
+  const invalidValue = !SCOREBOARD.value || (SCOREBOARD.value.length && isPointOrMinusOrPlus) || CURRENT_STATE.signIndex
+  const divisionByZero = Number(SCOREBOARD.value) === 0 && com.value === "1/x"
+  const rootFromNegative = Number(SCOREBOARD.value) < 0 && (com.value === "x^1/2" || com.value === "x^1/3")
+  const factorialFromRealNumber = SCOREBOARD.value.includes(".") && com.value === "!"
+
   if (CURRENT_STATE.command) {
-    ERROR_MESSAGE.innerHTML = "Perform previous command"
-  } else if (!SCOREBOARD.value || (SCOREBOARD.value.length && isPointOrMinusOrPlus) || CURRENT_STATE.signIndex) {
-    ERROR_MESSAGE.innerHTML = "Need one number"
-  } else if (Number(SCOREBOARD.value) === 0 && com.value === "1/x") {
-    ERROR_MESSAGE.innerHTML = "Division by 0"
-  } else if (Number(SCOREBOARD.value) < 0 && com.value === "x^1/2") {
-    ERROR_MESSAGE.innerHTML = "Should be positive"
-  } else if (SCOREBOARD.value.includes(".") && com.value === "!") {
-    ERROR_MESSAGE.innerHTML = "Should be integer"
+    ERROR.value = "Perform previous command"
+  } else if (invalidValue) {
+    ERROR.value = "The value should be one number"
+  } else if (divisionByZero) {
+    ERROR.value = "Division by 0"
+  } else if (rootFromNegative) {
+    ERROR.value = "Can't find a root of negative number"
+  } else if (factorialFromRealNumber) {
+    ERROR.value = "Can't find factorial of a real number"
   } else if (com.value === "10^n") {
     CALCULATOR.resetValue(10)
     CALCULATOR.executeCommand(oneValueCommandSelector(com.value, Number(SCOREBOARD.value)))

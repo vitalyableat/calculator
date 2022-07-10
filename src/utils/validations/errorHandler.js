@@ -1,3 +1,3 @@
-import {CALCULATOR, ERROR_MESSAGE, SCOREBOARD} from "../../consts";
+import {ERROR} from "../../consts";
 
-export const errorHandler = () => ERROR_MESSAGE.innerHTML ? ERROR_MESSAGE.innerHTML = "" : ""
+export const errorHandler = () => ERROR.value ? ERROR.value = "" : ""

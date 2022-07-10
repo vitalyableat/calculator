@@ -1,6 +1,6 @@
 import './styles/main.css'
 import {
-  BACKSPACE,
+  BACKSPACE, CURRENT_STATE,
   DARK_THEME_BTN,
   LIGHT_THEME_BTN,
   MEMORIES,
@@ -38,15 +38,15 @@ PREV_VALUE_BTN.addEventListener('click', prevValueValidation)
 
 SCOREBOARD.addEventListener('input', errorHandler)
 
-const descriptorProp = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
-const descriptorAttr = Object.getOwnPropertyDescriptor(Element.prototype, 'setAttribute');
+const descriptorProp = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')
+const descriptorAttr = Object.getOwnPropertyDescriptor(Element.prototype, 'setAttribute')
 
 Object.defineProperties(SCOREBOARD, {
   value: {
     get: descriptorProp.get,
     set(value) {
-      errorHandler();
-      descriptorProp.set.call(this, value);
+      errorHandler()
+      descriptorProp.set.call(this, value)
     },
   },
   setAttribute: {
@@ -54,7 +54,7 @@ Object.defineProperties(SCOREBOARD, {
       if (attr === 'value') {
         errorHandler();
       }
-      descriptorAttr.value.call(this, attr, value);
+      descriptorAttr.value.call(this, attr, value)
     },
   }
-});
+})

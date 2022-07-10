@@ -1,41 +1,54 @@
-import {CALCULATOR, CURRENT_STATE, ERROR_MESSAGE, SCOREBOARD, SIGN_VALUES} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, ERROR, SCOREBOARD, SIGN_VALUES} from "../../consts";
 import {arithmeticCommandSelector} from "../commandSelectors/arithmeticCommandSelector";
 import {twoValueCommandSelector} from "../commandSelectors/twoValueCommandSelector";
 
 export const signValidation = (sign) => {
+  const startOfInput = !SCOREBOARD.value || SCOREBOARD.value === '-'
   const lastSymbolIsSign = SIGN_VALUES.includes(SCOREBOARD.value[SCOREBOARD.value.length - 1])
 
-  if (lastSymbolIsSign) {
+  if (startOfInput) {
+    startWithSign(sign)
+  } else if (lastSymbolIsSign) {
     replaceSign(sign)
   } else if (CURRENT_STATE.command) {
     twoSignCommandHandler(sign)
-  } else if (SCOREBOARD.value.length) {
-    arithmeticCommandHandler(sign)
   } else {
-    addMinusOrPlusIfNeeded(sign)
+    arithmeticCommandHandler(sign)
+  }
+}
+
+const startWithSign = (sign) => {
+  if (sign.value === '-' && !SCOREBOARD.value) {
+    SCOREBOARD.value += sign.value
+  } else if (sign.value === '+') {
+    SCOREBOARD.value = ''
   }
 }
 
 const replaceSign = (sign) => {
-  const signIsMinusOrPlus = sign.value === '-' || sign.value === '+'
-  const canChangeTheSign = (SCOREBOARD.value.length > 1 && sign.value !== "=") || (SCOREBOARD.value.length === 1 && signIsMinusOrPlus)
+  const canAddMinus = sign.value === "-" && CURRENT_STATE.signIndex === SCOREBOARD.value.length - 1
+  const lastTwoSymbolsAreSigns = CURRENT_STATE.signIndex && CURRENT_STATE.signIndex !== SCOREBOARD.value.length - 1
 
-  if (canChangeTheSign) {
+  if (canAddMinus) {
+    SCOREBOARD.value += sign.value
+  } else if (lastTwoSymbolsAreSigns && sign.value !== '=') {
+    SCOREBOARD.value = SCOREBOARD.value.substring(0, SCOREBOARD.value.length - 2) + sign.value
+  } else if (sign.value !== '='){
     SCOREBOARD.value = SCOREBOARD.value.substring(0, SCOREBOARD.value.length - 1) + sign.value
-  } else {
-    ERROR_MESSAGE.innerHTML = "Can't put this sign here"
   }
 }
 
 const twoSignCommandHandler = (sign) => {
-  const signIsMinusOrPlus = sign.value === '-' || sign.value === '+'
+  const invalidValue = !SCOREBOARD.value || !Number.isFinite(Number(SCOREBOARD.value))
+  const divisionByZero = Number(SCOREBOARD.value) === 0 && CURRENT_STATE.command === "x^1/n"
+  const rootFromNegative = CALCULATOR.value < 0 && (Number(SCOREBOARD.value) < 1 && Number(SCOREBOARD.value) > - 1)
 
-  if (!SCOREBOARD.value && signIsMinusOrPlus) {
-    SCOREBOARD.value += sign.value
-  } else if ((!SCOREBOARD.value || !Number.isFinite(Number(SCOREBOARD.value)))) {
-    ERROR_MESSAGE.innerHTML = "Write N value"
-  } else if (Number(SCOREBOARD.value) === 0 && CURRENT_STATE.command === "x^1/n") {
-    ERROR_MESSAGE.innerHTML = "Division by 0"
+  if (invalidValue) {
+    ERROR.value = "N value should be one number"
+  } else if (divisionByZero) {
+    ERROR.value = "Division by 0"
+  } else if (rootFromNegative) {
+    ERROR.value = "Can't find a root of negative number"
   } else {
     CALCULATOR.executeCommand(twoValueCommandSelector(CURRENT_STATE.command, Number(SCOREBOARD.value)))
     SCOREBOARD.value = String(CALCULATOR.value)
@@ -48,29 +61,19 @@ const twoSignCommandHandler = (sign) => {
 const arithmeticCommandHandler = (sign) => {
   if (CURRENT_STATE.signIndex) {
     let y = Number(SCOREBOARD.value.substring(CURRENT_STATE.signIndex + 1, SCOREBOARD.value.length))
-    if (Number.isFinite(y)) {
-      if (y === 0 && SCOREBOARD.value[CURRENT_STATE.signIndex] === "÷") {
-        ERROR_MESSAGE.innerHTML = "Division by 0"
-      } else {
-        CALCULATOR.executeCommand(arithmeticCommandSelector(SCOREBOARD.value[CURRENT_STATE.signIndex], y))
-        SCOREBOARD.value = String(CALCULATOR.value)
-        CURRENT_STATE.signIndex = sign.value === "=" ? 0 : SCOREBOARD.value.length
-        SCOREBOARD.value += sign.value === "=" ? "" : sign.value
-      }
+    const divisionByZero = y === 0 && SCOREBOARD.value[CURRENT_STATE.signIndex] === "÷"
+
+    if (divisionByZero) {
+      ERROR.value = "Division by 0"
+    } else {
+      CALCULATOR.executeCommand(arithmeticCommandSelector(SCOREBOARD.value[CURRENT_STATE.signIndex], y))
+      SCOREBOARD.value = String(CALCULATOR.value)
+      CURRENT_STATE.signIndex = sign.value === "=" ? 0 : SCOREBOARD.value.length
+      SCOREBOARD.value += sign.value === "=" ? "" : sign.value
     }
-  } else if (Number.isFinite(Number(SCOREBOARD.value))) {
+  } else {
     CALCULATOR.resetValue(Number(SCOREBOARD.value))
     CURRENT_STATE.signIndex = sign.value === "=" ? 0 : SCOREBOARD.value.length
     SCOREBOARD.value += sign.value === "=" ? "" : sign.value
-  }
-}
-
-const addMinusOrPlusIfNeeded = (sign) => {
-  const signIsMinusOrPlus = sign.value === '-' || sign.value === '+'
-
-  if (signIsMinusOrPlus) {
-    SCOREBOARD.value += sign.value
-  } else {
-    ERROR_MESSAGE.innerHTML = "Can't start with this sign"
   }
 }

@@ -1,7 +1,9 @@
-import {AddCommand} from "../operations/AddComand/AddCommand";
-import {SubtractCommand} from "../operations/SubtractCommand/SubtractCommand";
-import {MultiplyCommand} from "../operations/MultiplyCommand/MultiplyCommand";
-import {DivideCommand} from "../operations/DivideCommand/DivideCommand";
+import {AddCommand} from "../commands/AddComand/AddCommand";
+import {SubtractCommand} from "../commands/SubtractCommand/SubtractCommand";
+import {MultiplyCommand} from "../commands/MultiplyCommand/MultiplyCommand";
+import {DivideCommand} from "../commands/DivideCommand/DivideCommand";
+
+
 
 export const arithmeticCommandSelector = (command, value) => {
   switch (command) {

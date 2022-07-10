@@ -1,4 +1,4 @@
-import {PowCommand} from "../operations/PowCommand/PowCommand";
+import {PowCommand} from "../commands/PowCommand/PowCommand";
 
 export const twoValueCommandSelector = (command, value) => {
   switch (command) {

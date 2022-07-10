@@ -22,12 +22,11 @@ export class Calculator {
   }
 
   executeCommand(command) {
+    this.history.push(this.value)
     this.value = command.execute(this.value)
-    this.history.push(command)
   }
 
   undo() {
-    const command = this.history.pop()
-    this.value = command.undo(this.value)
+    this.resetValue(this.history.pop())
   }
 }

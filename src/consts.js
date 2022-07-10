@@ -18,14 +18,24 @@ export const THEME_WRAP = document.getElementById("themeWrap")
 export const MEMORY_WRAP = document.getElementById("memoryWrap")
 export const ALL_ELEMENTS = document.querySelectorAll("*")
 export const BODY = document.querySelectorAll('body')[0]
-export const ERROR_MESSAGE = document.getElementById("errorMessage")
+export const ERROR = document.getElementById("errorMessage")
 
 export const SIGN_VALUES = ["+", "-", "×", "÷"]
 
-export const CURRENT_STATE = {
+const STATE = {
   x: 0,
   y: 0,
   signIndex: 0,
   command: "",
   theme: "dark"
 }
+
+export const CURRENT_STATE = new Proxy(STATE, {
+  set: function (target, key, value) {
+    if (key === 'command') {
+      TWO_VALUE_COMMANDS.forEach(com => com.style.backgroundColor = com.value === value ? "#ff8000" : '#5a5b5c')
+    }
+    target[key] = value
+    return true
+  }
+})

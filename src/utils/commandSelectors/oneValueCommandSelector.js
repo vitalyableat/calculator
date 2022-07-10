@@ -1,7 +1,7 @@
-import {InversionCommand} from "../operations/InversionCommand/InversionCommand";
-import {PercentageCommand} from "../operations/PercentageCommand/PercentageCommand";
-import {FactorialCommand} from "../operations/FactorialCommand/FactorialCommand";
-import {PowCommand} from "../operations/PowCommand/PowCommand";
+import {InversionCommand} from "../commands/InversionCommand/InversionCommand";
+import {PercentageCommand} from "../commands/PercentageCommand/PercentageCommand";
+import {FactorialCommand} from "../commands/FactorialCommand/FactorialCommand";
+import {PowCommand} from "../commands/PowCommand/PowCommand";
 
 export const oneValueCommandSelector = (command, value = 1) => {
   switch (command) {

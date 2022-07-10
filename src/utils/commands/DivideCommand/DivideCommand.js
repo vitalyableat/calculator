@@ -1,13 +1,11 @@
+import {checkOverflow} from "../../validations/checkOverflow";
+
 export class DivideCommand {
   constructor(valueToDivide) {
     this.valueToDivide = valueToDivide
   }
 
   execute(currentValue) {
-    return currentValue / this.valueToDivide
-  }
-
-  undo(currentValue) {
-    return currentValue * this.valueToDivide
+    return checkOverflow(currentValue / this.valueToDivide)
   }
 }
