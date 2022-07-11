@@ -27,7 +27,8 @@ const STATE = {
   y: 0,
   signIndex: 0,
   command: "",
-  theme: "dark"
+  theme: "dark",
+  overflow: false,
 }
 
 export const CURRENT_STATE = new Proxy(STATE, {

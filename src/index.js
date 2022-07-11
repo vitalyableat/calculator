@@ -8,7 +8,7 @@ import {
   ONE_VALUE_COMMANDS, PREV_VALUE_BTN, SCOREBOARD,
   SIGNS,
   TWO_VALUE_COMMANDS
-} from "./consts";
+} from "./const";
 import {numberValidation} from "./utils/validations/numberValidation";
 import {signValidation} from "./utils/validations/signValidation";
 import {backspaceValidation} from "./utils/validations/backspaceValidation";

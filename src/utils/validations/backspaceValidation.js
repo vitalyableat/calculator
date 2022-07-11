@@ -1,4 +1,4 @@
-import {CURRENT_STATE, SCOREBOARD} from "../../consts";
+import {CURRENT_STATE, SCOREBOARD} from "../../const";
 
 export const backspaceValidation = () => {
   if (CURRENT_STATE.signIndex >= SCOREBOARD.value.length - 1) {

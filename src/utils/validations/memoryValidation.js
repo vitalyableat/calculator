@@ -1,4 +1,4 @@
-import {CURRENT_STATE, ERROR, SCOREBOARD} from "../../consts";
+import {CURRENT_STATE, ERROR, SCOREBOARD} from "../../const";
 import {errorHandler} from "./errorHandler";
 import {memoryCommandSelector} from "../commandSelectors/memoryCommandSelector";
 

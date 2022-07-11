@@ -1,4 +1,4 @@
-import {CURRENT_STATE, ERROR, SCOREBOARD} from "../../consts";
+import {CURRENT_STATE, ERROR, SCOREBOARD} from "../../const";
 
 export const pointValidation = () => {
   const isFirstIncludesPoint = SCOREBOARD.value.includes(".")

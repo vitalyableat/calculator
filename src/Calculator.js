@@ -1,4 +1,4 @@
-import {MEM_VALUE} from "./consts";
+import {MEM_VALUE} from "./const";
 
 export class Calculator {
   constructor() {

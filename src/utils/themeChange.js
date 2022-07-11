@@ -7,7 +7,7 @@ import {
   PREV_VALUE_BTN,
   SCOREBOARD,
   THEME_WRAP
-} from "../consts";
+} from "../const";
 
 export const themeChangeDark = () => {
   if (CURRENT_STATE.theme !== 'dark') {

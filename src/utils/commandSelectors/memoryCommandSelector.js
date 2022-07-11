@@ -1,4 +1,4 @@
-import {CALCULATOR, SCOREBOARD} from "../../consts";
+import {CALCULATOR, SCOREBOARD} from "../../const";
 
 export const memoryCommandSelector = (command) => {
   switch (command) {

@@ -1,4 +1,4 @@
-import {CALCULATOR, CURRENT_STATE, ERROR, SCOREBOARD, SIGN_VALUES} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, ERROR, SCOREBOARD, SIGN_VALUES} from "../../const";
 import {arithmeticCommandSelector} from "../commandSelectors/arithmeticCommandSelector";
 import {twoValueCommandSelector} from "../commandSelectors/twoValueCommandSelector";
 
@@ -53,6 +53,7 @@ const twoSignCommandHandler = (sign) => {
     CALCULATOR.executeCommand(twoValueCommandSelector(CURRENT_STATE.command, Number(SCOREBOARD.value)))
     SCOREBOARD.value = String(CALCULATOR.value)
     CURRENT_STATE.command = ""
+    CURRENT_STATE.overflow = ERROR.value === "Value is out of range" ? true : false
     CURRENT_STATE.signIndex = sign.value === "=" ? 0 : SCOREBOARD.value.length
     SCOREBOARD.value += sign.value === "=" ? "" : sign.value
   }
@@ -68,6 +69,7 @@ const arithmeticCommandHandler = (sign) => {
     } else {
       CALCULATOR.executeCommand(arithmeticCommandSelector(SCOREBOARD.value[CURRENT_STATE.signIndex], y))
       SCOREBOARD.value = String(CALCULATOR.value)
+      CURRENT_STATE.overflow = ERROR.value === "Value is out of range" ? true : false
       CURRENT_STATE.signIndex = sign.value === "=" ? 0 : SCOREBOARD.value.length
       SCOREBOARD.value += sign.value === "=" ? "" : sign.value
     }

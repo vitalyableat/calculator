@@ -1,4 +1,4 @@
-import {CALCULATOR, CURRENT_STATE, ERROR, SCOREBOARD} from "../../consts";
+import {CALCULATOR, CURRENT_STATE, ERROR, SCOREBOARD} from "../../const";
 import {errorHandler} from "./errorHandler";
 
 export const prevValueValidation = () => {

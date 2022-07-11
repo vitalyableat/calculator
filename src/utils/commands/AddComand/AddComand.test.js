@@ -10,21 +10,22 @@ describe('AddCommand', () => {
     CALCULATOR.resetValue(40)
     CALCULATOR.executeCommand(new AddCommand(2))
     expect(CALCULATOR.value).toBe(42)
-    CALCULATOR.undo()
-    expect(CALCULATOR.value).toBe(40)
   })
   test('40.2 + 1.8', () => {
     CALCULATOR.resetValue(40.2)
     CALCULATOR.executeCommand(new AddCommand(1.8))
     expect(CALCULATOR.value).toBe(42)
-    CALCULATOR.undo()
-    expect(CALCULATOR.value).toBe(40.2)
   })
-  test('-42 + 0', () => {
+  test('-42 + -0', () => {
     CALCULATOR.resetValue(-42)
-    CALCULATOR.executeCommand(new AddCommand(0))
-    expect(CALCULATOR.value).toBe(-42)
-    CALCULATOR.undo()
+    CALCULATOR.executeCommand(new AddCommand(-0))
     expect(CALCULATOR.value).toBe(-42)
   })
+  test('999999999999999999 + 1', () => {
+    CALCULATOR.resetValue(999999999999999999)
+    CALCULATOR.executeCommand(new AddCommand(1))
+    // Error "Value is out of range" is handled, setting CALCULATOR.value to 0
+    expect(CALCULATOR.value).toBe(0)
+  })
+
 })

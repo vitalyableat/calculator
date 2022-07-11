@@ -1,11 +1,8 @@
-import {ERROR} from "../../consts";
+import {CURRENT_STATE, ERROR} from "../../const";
 
 export const checkOverflow = (value) => {
   if (value > Number.MAX_SAFE_INTEGER || value < Number.MIN_SAFE_INTEGER) {
-    ERROR.value = "Overflow"
-    ERROR.innerText = "Overflow"
-    ERROR.textContent = "Overflow"
-    // ERROR.outerHTML = `<input class="errorMessage" id="errorMessage" value="Overflow" readonly/>`
+    CURRENT_STATE.overflow = true
     return 0
   }
   return value

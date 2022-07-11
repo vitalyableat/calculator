@@ -1,5 +1,5 @@
 import {pointValidation} from "./pointValidation";
-import {SCOREBOARD} from "../../consts";
+import {SCOREBOARD} from "../../const";
 
 export const numberValidation = (num) => {
   if (num.value === ".") {
