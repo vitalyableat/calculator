@@ -1,4 +1,4 @@
-# Calculator
+# Innowise Lab Internship: Level 0 - Calculator
 ## Task
 ### **→** [Requirements](https://docs.google.com/document/d/1j8DnTnRSNoRBdYtKu3Rgk1STLso4X5Rev2-oEyxMsK8/edit)
 ### **→** [Deployment](https://calculator-olivertears.vercel.app/)
